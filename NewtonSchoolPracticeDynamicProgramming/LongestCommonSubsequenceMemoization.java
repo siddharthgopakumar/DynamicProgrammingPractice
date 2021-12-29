@@ -7,7 +7,7 @@ package NewtonSchoolPracticeDynamicProgramming;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class LongestCommonSubsequence {
+public class LongestCommonSubsequenceMemoization {
     public int longestSubsequence (String one, String two, int[][] table) {
         int lOne = one.length(), lTwo = two.length();
         if(lOne == 0 || lTwo == 0)  return 0;
