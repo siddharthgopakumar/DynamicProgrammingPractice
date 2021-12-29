@@ -9,14 +9,19 @@ package NewtonSchoolPracticeDynamicProgramming;
  */
 public class BruteForceLengthOfLongestSubsequence {
     public int longestSubsequence (String one, String two) {
-        if(one.length() == 0 || two.length() == 0)  return 0;
-        longestSubsequence
-        return 0;
+        int lOne = one.length(), lTwo = two.length();
+        if(lOne == 0 || lTwo == 0)  return 0;
+        
+        if(one.charAt(lOne - 1) == two.charAt(lTwo - 1))    {
+            return 1 + longestSubsequence(one.substring(0, lOne - 1), two.substring(0, lTwo - 1));
+        }   else    {
+            return Math.max(longestSubsequence(one.substring(0, lOne - 1), two), longestSubsequence (one, two.substring(0, lTwo - 1)));
+        }
     }
     
     public void tester () {
-        String one = "";
-        String two = "";
+        String one = "ACBC";
+        String two = "ADBD";
         System.out.println(longestSubsequence(one, two));
     }
 
