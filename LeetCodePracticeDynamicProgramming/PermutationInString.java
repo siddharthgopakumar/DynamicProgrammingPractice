@@ -6,26 +6,29 @@ package LeetCodePracticeDynamicProgramming;
  * @author (your name) 
  * @version (a version number or a date)
  */
+import java.util.*;
 public class PermutationInString {
-    public boolean isSubstring(String one, String two)  {
-        int onelen = one.length();
-        StringBuilder temp = new StringBuilder(two);
-        for(int i = 0; i < onelen; i++) {
-            int t = temp.toString().indexOf(one.charAt(i));
-            if(t == -1) {
-                return false;
-            }   else    {
-                temp.deleteCharAt(t);
-            }
+    public boolean isSubstring(int[] tableOne, String two)  {
+        int onelen = two.length();
+        int[] tabletwo = new int[26];
+        for(int i = 0; i < onelen; i++)   {
+            tabletwo[two.charAt(i) - 97]  = (tabletwo[two.charAt(i) - 97] == 0)? 1:tabletwo[two.charAt(i) - 97]  + 1  ;
+        }         
+        for(int i = 0; i < 26; i++) {
+            if(tableOne[i] != tabletwo[i])  return false;
         }
         return true;
     }
 
     public boolean isPermutation(String one, String two) {
         int lone = one.length(), ltwo = two.length();
+        int[] tableOne = new int[26];
+        for(int i = 0; i < lone; i++)   {
+            tableOne[one.charAt(i) - 97]  = (tableOne[one.charAt(i) - 97] == 0)? 1:tableOne[one.charAt(i) - 97]  + 1  ;
+        }   
         for(int i = 0; i + lone <= ltwo; i++)    {
             String temp = two.substring(i, i + lone);
-            if(isSubstring(one, temp)) {System.out.println(one + " " + temp); return true;}
+            if(isSubstring(tableOne, temp))  return true;
         }
         return false;
     }
@@ -33,8 +36,11 @@ public class PermutationInString {
     public void tester () {
         String one = "hello";
         String two = "ooolleoooleh"; //eidbaooo";  //eidboaoo
-        boolean temp = isPermutation(one, two);
-        System.out.println(temp);
+        System.out.println(isPermutation(one, two));
+        
+        
+        
+        
     }
 
 }
